@@ -4,6 +4,8 @@ import (
 	"encoding/csv"
 	"fmt"
 	"io"
+	"io/ioutil"
+	"math"
 	"strconv"
 	"time"
 
@@ -22,8 +24,9 @@ func First(f io.Reader) ([]string, error) {
 	return r.Read()
 }
 
-func Parse(f io.Reader, m Mapping) ([]transaction.Transaction, error) {
-	r := csv.NewReader(f)
+func Parse(in io.Reader, m Mapping) ([]transaction.Transaction, error) {
+	r := csv.NewReader(in)
+	r.LazyQuotes = true
 	t := []transaction.Transaction{}
 	for {
 		record, err := r.Read()
@@ -31,19 +34,20 @@ func Parse(f io.Reader, m Mapping) ([]transaction.Transaction, error) {
 			break
 		}
 		if err != nil {
-			return nil, err
+			txt, _ := ioutil.ReadAll(in)
+			return nil, fmt.Errorf("Error reading line %s (%s)", txt, err)
 		}
 
 		d, err := time.Parse(m.DateFormat, record[m.Date])
 		if err != nil {
-			err = fmt.Errorf("error parsing record date %s (%s) ",
+			err = fmt.Errorf("Error parsing record date %s (%s) ",
 				record[m.Date], err)
 			return nil, err
 		}
 
 		v, err := strconv.ParseFloat(record[m.Value], 64)
 		if err != nil {
-			err = fmt.Errorf("error parsing record value %s (%s) ",
+			err = fmt.Errorf("Error parsing record value %s (%s) ",
 				record[m.Value], err)
 			return nil, err
 		}
@@ -52,7 +56,7 @@ func Parse(f io.Reader, m Mapping) ([]transaction.Transaction, error) {
 			Date:        d,
 			Description: record[m.Description],
 			Type:        transaction.Debit,
-			Value:       uint(v * 100),
+			Value:       uint(math.Abs(v * 100)),
 		})
 	}
 

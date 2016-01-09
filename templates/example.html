@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Bank Statement Upload</title>
+  </head>
+  <body>
+    <h1>Select Matching Columns</h1>
+    <form action="/parse" method="post">
+      <input type="hidden" name="id" value="{{.ID}}"/>
+      <div>
+        <label for="date">Date Column</label>
+        <select name="date" required>
+          <option value="" disabled selected>Select</option>
+          {{ range $i, $n := .Record }}
+          <option value="{{$i}}">{{$n}}</option>
+          {{ end }}
+        </select>
+        <select name="date_format" required>
+          <option value="" disabled selected>Format</option>
+          <option value="2/1/06">Day / Month / Year</option>
+          <option value="1/2/06">Month / Day / Year</option>
+          <option value="06/1/2">Year / Month / Day</option>
+        </select>
+      </div>
+      <div>
+        <label for="description">Description Column</label>
+        <select name="description" required>
+          <option value="" disabled selected>Select</option>
+          {{ range $i, $n := .Record }}
+          <option value="{{$i}}">{{$n}}</option>
+          {{ end }}
+        </select>
+      </div>
+      <div>
+        <label for="value">Value Column</label>
+        <select name="value" required>
+          <option value="" disabled selected>Select</option>
+          {{ range $i, $n := .Record }}
+          <option value="{{$i}}">{{$n}}</option>
+          {{ end }}
+        </select>
+      </div>
+      <button type="submit">Continue</button>
+    </form>
+  </body>
+</html>

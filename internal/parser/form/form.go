@@ -5,9 +5,9 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/luizbranco/waukeen/internal/parser/csv"
-	"github.com/luizbranco/waukeen/internal/parser/worker"
-	"github.com/luizbranco/waukeen/internal/transaction"
+	"github.com/luizbranco/csv_eg/internal/parser/csv"
+	"github.com/luizbranco/csv_eg/internal/parser/worker"
+	"github.com/luizbranco/csv_eg/internal/transaction"
 )
 
 const MB = 1 << (10 * 2)

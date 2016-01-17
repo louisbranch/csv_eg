@@ -9,7 +9,7 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/luizbranco/waukeen/internal/transaction"
+	"github.com/luizbranco/csv_eg/internal/transaction"
 )
 
 type Mapping struct {

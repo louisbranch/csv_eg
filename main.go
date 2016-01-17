@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/luizbranco/waukeen/internal/parser/form"
-	"github.com/luizbranco/waukeen/internal/parser/worker"
-	"github.com/luizbranco/waukeen/internal/views"
+	"github.com/luizbranco/csv_eg/internal/parser/form"
+	"github.com/luizbranco/csv_eg/internal/parser/worker"
+	"github.com/luizbranco/csv_eg/internal/views"
 )
 
 func main() {

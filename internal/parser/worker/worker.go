@@ -7,10 +7,10 @@ import (
 	"sync"
 	"time"
 
-	"code.google.com/p/go-uuid/uuid"
+	"github.com/luizbranco/csv_eg/internal/parser/csv"
+	"github.com/luizbranco/csv_eg/internal/transaction"
 
-	"github.com/luizbranco/waukeen/internal/parser/csv"
-	"github.com/luizbranco/waukeen/internal/transaction"
+	"code.google.com/p/go-uuid/uuid"
 )
 
 type Pool struct {
